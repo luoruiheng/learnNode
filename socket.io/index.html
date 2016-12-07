@@ -5,10 +5,19 @@
 </head>
 <body>
 	<h1>Socket IO Example</h1>
+	<h2>How many users are there?</h2>
+	<p id="count"></p>
+
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
 		var socket = io.connect('http://127.0.0.1:3000');
-		alert(socket);
+		var count = document.getElementById('count');
+
+		socket.on('users',function(data){
+			console.log('Got update from the server');
+			console.log('There are' + data.number + 'users');
+			count.innerHTML = data.number;
+		});
 	</script>
 </body>
 </html>
